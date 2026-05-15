@@ -1,5 +1,7 @@
 package com.xmyk.dentistservice.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.xmyk.common.annotation.Excel;
@@ -11,21 +13,26 @@ import com.xmyk.common.core.domain.BaseEntity;
  * @author anlex
  * @date 2026-05-15
  */
+@ApiModel("牙科计划")
 public class DentistPlan extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** 编号 */
+    @ApiModelProperty("编号")
     private Long id;
 
     /** 排序号 */
+    @ApiModelProperty("排序号")
     private Integer sortNo;
 
     /** 名称 */
+    @ApiModelProperty("名称")
     @Excel(name = "名称")
     private String planName;
 
     /** 状态 0禁用 1启用 */
+    @ApiModelProperty("状态 0禁用 1启用")
     @Excel(name = "状态 0禁用 1启用")
     private Integer status;
 

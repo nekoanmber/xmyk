@@ -18,6 +18,8 @@
     </properties>
 
     <dependencies>
+
+
         <dependency>
             <groupId>com.xmyk</groupId>
             <artifactId>xmyk-common</artifactId>

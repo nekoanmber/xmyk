@@ -2,6 +2,12 @@ package com.xmyk.dentistservice.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+
+import com.xmyk.common.core.domain.R;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +33,7 @@ import com.xmyk.common.core.page.TableDataInfo;
  * @author anlex
  * @date 2026-05-15
  */
+@Api("服务项目管理")
 @RestController
 @RequestMapping("/dentistservice/project")
 public class ServiceProjectController extends BaseController
@@ -39,7 +46,8 @@ public class ServiceProjectController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('dentistservice:project:list')")
     @GetMapping("/list")
-    public TableDataInfo list(ServiceProject serviceProject)
+    @ApiOperation("获取服务项目列表")
+    public TableDataInfo<List<ServiceProject>> list(@ApiParam(value = "查询参数") ServiceProject serviceProject)
     {
         startPage();
         List<ServiceProject> list = serviceProjectService.selectServiceProjectList(serviceProject);
@@ -52,6 +60,7 @@ public class ServiceProjectController extends BaseController
     @PreAuthorize("@ss.hasPermi('dentistservice:project:export')")
     @Log(title = "服务项目", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
+    @ApiOperation("导出服务项目列表")
     public void export(HttpServletResponse response, ServiceProject serviceProject)
     {
         List<ServiceProject> list = serviceProjectService.selectServiceProjectList(serviceProject);
@@ -64,9 +73,10 @@ public class ServiceProjectController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('dentistservice:project:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
+    @ApiOperation("获取服务项目详细信息")
+    public R<ServiceProject> getInfo(@PathVariable("id") @ApiParam("项目id") Long id)
     {
-        return success(serviceProjectService.selectServiceProjectById(id));
+        return R.ok(serviceProjectService.selectServiceProjectById(id));
     }
 
     /**
@@ -75,7 +85,8 @@ public class ServiceProjectController extends BaseController
     @PreAuthorize("@ss.hasPermi('dentistservice:project:add')")
     @Log(title = "服务项目", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody ServiceProject serviceProject)
+    @ApiOperation("新增服务项目")
+    public AjaxResult add(@RequestBody @ApiParam("新增的服务项目对象") ServiceProject serviceProject)
     {
         return toAjax(serviceProjectService.insertServiceProject(serviceProject));
     }
@@ -86,7 +97,8 @@ public class ServiceProjectController extends BaseController
     @PreAuthorize("@ss.hasPermi('dentistservice:project:edit')")
     @Log(title = "服务项目", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody ServiceProject serviceProject)
+    @ApiOperation("修改服务项目")
+    public AjaxResult edit(@RequestBody @ApiParam("修改后的服务项目对象") ServiceProject serviceProject)
     {
         return toAjax(serviceProjectService.updateServiceProject(serviceProject));
     }
@@ -97,7 +109,8 @@ public class ServiceProjectController extends BaseController
     @PreAuthorize("@ss.hasPermi('dentistservice:project:remove')")
     @Log(title = "服务项目", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
+    @ApiOperation("删除服务项目")
+    public AjaxResult remove(@PathVariable @ApiParam("要删除的项目") Long[] ids)
     {
         return toAjax(serviceProjectService.deleteServiceProjectByIds(ids));
     }

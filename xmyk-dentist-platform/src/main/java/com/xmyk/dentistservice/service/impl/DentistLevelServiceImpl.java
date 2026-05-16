@@ -1,5 +1,6 @@
 package com.xmyk.dentistservice.service.impl;
 
+import java.util.Arrays;
 import java.util.List;
 import com.xmyk.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,15 +8,16 @@ import org.springframework.stereotype.Service;
 import com.xmyk.dentistservice.mapper.DentistLevelMapper;
 import com.xmyk.dentistservice.domain.DentistLevel;
 import com.xmyk.dentistservice.service.IDentistLevelService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 /**
  * 牙科等级Service业务层处理
  * 
  * @author anlex
- * @date 2026-05-15
+ * @date 2026-05-16
  */
 @Service
-public class DentistLevelServiceImpl implements IDentistLevelService 
+public class DentistLevelServiceImpl extends ServiceImpl<DentistLevelMapper, DentistLevel> implements IDentistLevelService
 {
     @Autowired
     private DentistLevelMapper dentistLevelMapper;
@@ -29,7 +31,7 @@ public class DentistLevelServiceImpl implements IDentistLevelService
     @Override
     public DentistLevel selectDentistLevelById(Long id)
     {
-        return dentistLevelMapper.selectDentistLevelById(id);
+        return getById(id);
     }
 
     /**
@@ -53,8 +55,7 @@ public class DentistLevelServiceImpl implements IDentistLevelService
     @Override
     public int insertDentistLevel(DentistLevel dentistLevel)
     {
-        dentistLevel.setCreateTime(DateUtils.getNowDate());
-        return dentistLevelMapper.insertDentistLevel(dentistLevel);
+        return save(dentistLevel) ? 1 : 0;
     }
 
     /**
@@ -66,8 +67,7 @@ public class DentistLevelServiceImpl implements IDentistLevelService
     @Override
     public int updateDentistLevel(DentistLevel dentistLevel)
     {
-        dentistLevel.setUpdateTime(DateUtils.getNowDate());
-        return dentistLevelMapper.updateDentistLevel(dentistLevel);
+        return updateById(dentistLevel) ? 1 : 0;
     }
 
     /**
@@ -79,7 +79,7 @@ public class DentistLevelServiceImpl implements IDentistLevelService
     @Override
     public int deleteDentistLevelByIds(Long[] ids)
     {
-        return dentistLevelMapper.deleteDentistLevelByIds(ids);
+        return removeByIds(Arrays.asList(ids)) ? 1 : 0;
     }
 
     /**
@@ -91,6 +91,6 @@ public class DentistLevelServiceImpl implements IDentistLevelService
     @Override
     public int deleteDentistLevelById(Long id)
     {
-        return dentistLevelMapper.deleteDentistLevelById(id);
+        return removeById(id) ? 1 : 0;
     }
 }

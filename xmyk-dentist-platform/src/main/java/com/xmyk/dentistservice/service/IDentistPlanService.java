@@ -2,14 +2,15 @@ package com.xmyk.dentistservice.service;
 
 import java.util.List;
 import com.xmyk.dentistservice.domain.DentistPlan;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * 牙科计划Service接口
  * 
  * @author anlex
- * @date 2026-05-15
+ * @date 2026-05-16
  */
-public interface IDentistPlanService 
+public interface IDentistPlanService extends IService<DentistPlan>
 {
     /**
      * 查询牙科计划

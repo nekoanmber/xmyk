@@ -30,7 +30,7 @@ import com.xmyk.common.core.page.TableDataInfo;
  * 牙科等级Controller
  * 
  * @author anlex
- * @date 2026-05-15
+ * @date 2026-05-16
  */
 @Api("牙科等级管理")
 @RestController
@@ -43,10 +43,10 @@ public class DentistLevelController extends BaseController
     /**
      * 查询牙科等级列表
      */
+    @ApiOperation("查询牙科等级列表")
     @PreAuthorize("@ss.hasPermi('dentistservice:level:list')")
     @GetMapping("/list")
-    @ApiOperation("获取牙科等级列表")
-    public TableDataInfo<List<DentistLevel>> list(@ApiParam("查询参数") DentistLevel dentistLevel)
+    public TableDataInfo<List<DentistLevel>> list(@ApiParam("查询条件对象") DentistLevel dentistLevel)
     {
         startPage();
         List<DentistLevel> list = dentistLevelService.selectDentistLevelList(dentistLevel);
@@ -56,11 +56,11 @@ public class DentistLevelController extends BaseController
     /**
      * 导出牙科等级列表
      */
+    @ApiOperation("导出牙科等级列表")
     @PreAuthorize("@ss.hasPermi('dentistservice:level:export')")
     @Log(title = "牙科等级", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    @ApiOperation("导出牙科等级列表")
-    public void export(@ApiParam("响应对象") HttpServletResponse response,@ApiParam("查询参数") DentistLevel dentistLevel)
+    public void export(@ApiParam("导出条件对象") HttpServletResponse response, DentistLevel dentistLevel)
     {
         List<DentistLevel> list = dentistLevelService.selectDentistLevelList(dentistLevel);
         ExcelUtil<DentistLevel> util = new ExcelUtil<DentistLevel>(DentistLevel.class);
@@ -73,7 +73,7 @@ public class DentistLevelController extends BaseController
     @ApiOperation("获取牙科等级详细信息")
     @PreAuthorize("@ss.hasPermi('dentistservice:level:query')")
     @GetMapping(value = "/{id}")
-    public R<DentistLevel> getInfo(@PathVariable("id") @ApiParam("等级id") Long id)
+    public R<DentistLevel> getInfo(@PathVariable("id") @ApiParam("牙科等级ID") Long id)
     {
         return R.ok(dentistLevelService.selectDentistLevelById(id));
     }
@@ -85,7 +85,7 @@ public class DentistLevelController extends BaseController
     @PreAuthorize("@ss.hasPermi('dentistservice:level:add')")
     @Log(title = "牙科等级", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody @ApiParam("新增的等级对象") DentistLevel dentistLevel)
+    public AjaxResult add(@RequestBody @ApiParam("新增条件对象") DentistLevel dentistLevel)
     {
         return toAjax(dentistLevelService.insertDentistLevel(dentistLevel));
     }
@@ -97,7 +97,7 @@ public class DentistLevelController extends BaseController
     @PreAuthorize("@ss.hasPermi('dentistservice:level:edit')")
     @Log(title = "牙科等级", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody @ApiParam("修改后的等级对象") DentistLevel dentistLevel)
+    public AjaxResult edit(@RequestBody @ApiParam("修改条件对象") DentistLevel dentistLevel)
     {
         return toAjax(dentistLevelService.updateDentistLevel(dentistLevel));
     }
@@ -109,7 +109,7 @@ public class DentistLevelController extends BaseController
     @PreAuthorize("@ss.hasPermi('dentistservice:level:remove')")
     @Log(title = "牙科等级", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable @ApiParam("要删除的等级id数组") Long[] ids)
+    public AjaxResult remove(@PathVariable @ApiParam("删除条件对象") Long[] ids)
     {
         return toAjax(dentistLevelService.deleteDentistLevelByIds(ids));
     }

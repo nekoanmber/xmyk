@@ -260,6 +260,13 @@ public class VelocityUtils
                 importList.add("java.util.Date");
                 importList.add("com.fasterxml.jackson.annotation.JsonFormat");
             }
+
+            if (!column.isSuperColumn() && GenConstants.TYPE_LOCAL_DATE_TYPE.equals(column.getJavaType()))
+            {
+                importList.add("java.time.LocalDateTime");
+                importList.add("com.fasterxml.jackson.annotation.JsonFormat");
+            }
+
             else if (!column.isSuperColumn() && GenConstants.TYPE_BIGDECIMAL.equals(column.getJavaType()))
             {
                 importList.add("java.math.BigDecimal");

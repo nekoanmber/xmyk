@@ -30,7 +30,7 @@ import com.xmyk.common.core.page.TableDataInfo;
  * 牙科计划Controller
  * 
  * @author anlex
- * @date 2026-05-15
+ * @date 2026-05-16
  */
 @Api("牙科计划管理")
 @RestController
@@ -46,7 +46,7 @@ public class DentistPlanController extends BaseController
     @ApiOperation("查询牙科计划列表")
     @PreAuthorize("@ss.hasPermi('dentistservice:plan:list')")
     @GetMapping("/list")
-    public TableDataInfo<List<DentistPlan>> list(@ApiParam("查询参数") DentistPlan dentistPlan)
+    public TableDataInfo<List<DentistPlan>> list(@ApiParam("查询条件对象") DentistPlan dentistPlan)
     {
         startPage();
         List<DentistPlan> list = dentistPlanService.selectDentistPlanList(dentistPlan);
@@ -60,7 +60,7 @@ public class DentistPlanController extends BaseController
     @PreAuthorize("@ss.hasPermi('dentistservice:plan:export')")
     @Log(title = "牙科计划", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, DentistPlan dentistPlan)
+    public void export(@ApiParam("导出条件对象") HttpServletResponse response, DentistPlan dentistPlan)
     {
         List<DentistPlan> list = dentistPlanService.selectDentistPlanList(dentistPlan);
         ExcelUtil<DentistPlan> util = new ExcelUtil<DentistPlan>(DentistPlan.class);
@@ -73,7 +73,7 @@ public class DentistPlanController extends BaseController
     @ApiOperation("获取牙科计划详细信息")
     @PreAuthorize("@ss.hasPermi('dentistservice:plan:query')")
     @GetMapping(value = "/{id}")
-    public R<DentistPlan> getInfo(@PathVariable("id") @ApiParam("计划id") Long id)
+    public R<DentistPlan> getInfo(@PathVariable("id") @ApiParam("牙科计划ID") Long id)
     {
         return R.ok(dentistPlanService.selectDentistPlanById(id));
     }
@@ -85,7 +85,7 @@ public class DentistPlanController extends BaseController
     @PreAuthorize("@ss.hasPermi('dentistservice:plan:add')")
     @Log(title = "牙科计划", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody @ApiParam("新增的计划对象") DentistPlan dentistPlan)
+    public AjaxResult add(@RequestBody @ApiParam("新增条件对象") DentistPlan dentistPlan)
     {
         return toAjax(dentistPlanService.insertDentistPlan(dentistPlan));
     }
@@ -97,7 +97,7 @@ public class DentistPlanController extends BaseController
     @PreAuthorize("@ss.hasPermi('dentistservice:plan:edit')")
     @Log(title = "牙科计划", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody @ApiParam("修改后的计划对象") DentistPlan dentistPlan)
+    public AjaxResult edit(@RequestBody @ApiParam("修改条件对象") DentistPlan dentistPlan)
     {
         return toAjax(dentistPlanService.updateDentistPlan(dentistPlan));
     }
@@ -109,7 +109,7 @@ public class DentistPlanController extends BaseController
     @PreAuthorize("@ss.hasPermi('dentistservice:plan:remove')")
     @Log(title = "牙科计划", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable @ApiParam("要删除的id数组") Long[] ids)
+    public AjaxResult remove(@PathVariable @ApiParam("删除条件对象") Long[] ids)
     {
         return toAjax(dentistPlanService.deleteDentistPlanByIds(ids));
     }

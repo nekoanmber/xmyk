@@ -1,5 +1,6 @@
 package com.xmyk.dentistservice.service.impl;
 
+import java.util.Arrays;
 import java.util.List;
 import com.xmyk.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,15 +8,16 @@ import org.springframework.stereotype.Service;
 import com.xmyk.dentistservice.mapper.DentistPlanMapper;
 import com.xmyk.dentistservice.domain.DentistPlan;
 import com.xmyk.dentistservice.service.IDentistPlanService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 /**
  * 牙科计划Service业务层处理
  * 
  * @author anlex
- * @date 2026-05-15
+ * @date 2026-05-16
  */
 @Service
-public class DentistPlanServiceImpl implements IDentistPlanService 
+public class DentistPlanServiceImpl extends ServiceImpl<DentistPlanMapper, DentistPlan> implements IDentistPlanService
 {
     @Autowired
     private DentistPlanMapper dentistPlanMapper;
@@ -29,7 +31,7 @@ public class DentistPlanServiceImpl implements IDentistPlanService
     @Override
     public DentistPlan selectDentistPlanById(Long id)
     {
-        return dentistPlanMapper.selectDentistPlanById(id);
+        return getById(id);
     }
 
     /**
@@ -53,8 +55,7 @@ public class DentistPlanServiceImpl implements IDentistPlanService
     @Override
     public int insertDentistPlan(DentistPlan dentistPlan)
     {
-        dentistPlan.setCreateTime(DateUtils.getNowDate());
-        return dentistPlanMapper.insertDentistPlan(dentistPlan);
+        return save(dentistPlan) ? 1 : 0;
     }
 
     /**
@@ -66,8 +67,7 @@ public class DentistPlanServiceImpl implements IDentistPlanService
     @Override
     public int updateDentistPlan(DentistPlan dentistPlan)
     {
-        dentistPlan.setUpdateTime(DateUtils.getNowDate());
-        return dentistPlanMapper.updateDentistPlan(dentistPlan);
+        return updateById(dentistPlan) ? 1 : 0;
     }
 
     /**
@@ -79,7 +79,7 @@ public class DentistPlanServiceImpl implements IDentistPlanService
     @Override
     public int deleteDentistPlanByIds(Long[] ids)
     {
-        return dentistPlanMapper.deleteDentistPlanByIds(ids);
+        return removeByIds(Arrays.asList(ids)) ? 1 : 0;
     }
 
     /**
@@ -91,6 +91,6 @@ public class DentistPlanServiceImpl implements IDentistPlanService
     @Override
     public int deleteDentistPlanById(Long id)
     {
-        return dentistPlanMapper.deleteDentistPlanById(id);
+        return removeById(id) ? 1 : 0;
     }
 }

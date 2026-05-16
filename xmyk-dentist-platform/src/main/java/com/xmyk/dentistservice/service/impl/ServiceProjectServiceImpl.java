@@ -1,5 +1,6 @@
 package com.xmyk.dentistservice.service.impl;
 
+import java.util.Arrays;
 import java.util.List;
 import com.xmyk.common.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,15 +8,16 @@ import org.springframework.stereotype.Service;
 import com.xmyk.dentistservice.mapper.ServiceProjectMapper;
 import com.xmyk.dentistservice.domain.ServiceProject;
 import com.xmyk.dentistservice.service.IServiceProjectService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 /**
  * 服务项目Service业务层处理
  * 
  * @author anlex
- * @date 2026-05-15
+ * @date 2026-05-16
  */
 @Service
-public class ServiceProjectServiceImpl implements IServiceProjectService 
+public class ServiceProjectServiceImpl extends ServiceImpl<ServiceProjectMapper, ServiceProject> implements IServiceProjectService
 {
     @Autowired
     private ServiceProjectMapper serviceProjectMapper;
@@ -29,7 +31,7 @@ public class ServiceProjectServiceImpl implements IServiceProjectService
     @Override
     public ServiceProject selectServiceProjectById(Long id)
     {
-        return serviceProjectMapper.selectServiceProjectById(id);
+        return getById(id);
     }
 
     /**
@@ -53,8 +55,7 @@ public class ServiceProjectServiceImpl implements IServiceProjectService
     @Override
     public int insertServiceProject(ServiceProject serviceProject)
     {
-        serviceProject.setCreateTime(DateUtils.getNowDate());
-        return serviceProjectMapper.insertServiceProject(serviceProject);
+        return save(serviceProject) ? 1 : 0;
     }
 
     /**
@@ -66,8 +67,7 @@ public class ServiceProjectServiceImpl implements IServiceProjectService
     @Override
     public int updateServiceProject(ServiceProject serviceProject)
     {
-        serviceProject.setUpdateTime(DateUtils.getNowDate());
-        return serviceProjectMapper.updateServiceProject(serviceProject);
+        return updateById(serviceProject) ? 1 : 0;
     }
 
     /**
@@ -79,7 +79,7 @@ public class ServiceProjectServiceImpl implements IServiceProjectService
     @Override
     public int deleteServiceProjectByIds(Long[] ids)
     {
-        return serviceProjectMapper.deleteServiceProjectByIds(ids);
+        return removeByIds(Arrays.asList(ids)) ? 1 : 0;
     }
 
     /**
@@ -91,6 +91,6 @@ public class ServiceProjectServiceImpl implements IServiceProjectService
     @Override
     public int deleteServiceProjectById(Long id)
     {
-        return serviceProjectMapper.deleteServiceProjectById(id);
+        return removeById(id) ? 1 : 0;
     }
 }

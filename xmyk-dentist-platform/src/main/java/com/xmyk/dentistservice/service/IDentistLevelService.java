@@ -2,14 +2,15 @@ package com.xmyk.dentistservice.service;
 
 import java.util.List;
 import com.xmyk.dentistservice.domain.DentistLevel;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * 牙科等级Service接口
  * 
  * @author anlex
- * @date 2026-05-15
+ * @date 2026-05-16
  */
-public interface IDentistLevelService 
+public interface IDentistLevelService extends IService<DentistLevel>
 {
     /**
      * 查询牙科等级

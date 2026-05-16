@@ -13,6 +13,8 @@
     <description>小马牙科</description>
     
     <properties>
+        <mybatis-plus-spring-boot.version>3.5.2</mybatis-plus-spring-boot.version>
+        <lombok.version>1.18.22</lombok.version>
         <xmyk.version>3.8.9</xmyk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -223,6 +225,25 @@
                 <groupId>com.xmyk</groupId>
                 <artifactId>xmyk-dentist-platform</artifactId>
                 <version>${xmyk.version}</version>
+            </dependency>
+
+            <!-- lombok -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <!-- mybatis-plus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis-plus-spring-boot.version}</version>
             </dependency>
 
         </dependencies>

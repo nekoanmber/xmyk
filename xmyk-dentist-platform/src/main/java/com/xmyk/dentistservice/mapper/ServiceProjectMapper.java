@@ -2,14 +2,17 @@ package com.xmyk.dentistservice.mapper;
 
 import java.util.List;
 import com.xmyk.dentistservice.domain.ServiceProject;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 服务项目Mapper接口
  * 
  * @author anlex
- * @date 2026-05-15
+ * @date 2026-05-16
  */
-public interface ServiceProjectMapper 
+@Mapper
+public interface ServiceProjectMapper extends BaseMapper<ServiceProject>
 {
     /**
      * 查询服务项目

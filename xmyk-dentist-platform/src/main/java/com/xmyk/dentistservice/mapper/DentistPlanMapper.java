@@ -2,14 +2,17 @@ package com.xmyk.dentistservice.mapper;
 
 import java.util.List;
 import com.xmyk.dentistservice.domain.DentistPlan;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 牙科计划Mapper接口
  * 
  * @author anlex
- * @date 2026-05-15
+ * @date 2026-05-16
  */
-public interface DentistPlanMapper 
+@Mapper
+public interface DentistPlanMapper extends BaseMapper<DentistPlan>
 {
     /**
      * 查询牙科计划

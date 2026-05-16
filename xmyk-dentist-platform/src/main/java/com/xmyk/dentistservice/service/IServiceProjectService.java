@@ -2,14 +2,15 @@ package com.xmyk.dentistservice.service;
 
 import java.util.List;
 import com.xmyk.dentistservice.domain.ServiceProject;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * 服务项目Service接口
  * 
  * @author anlex
- * @date 2026-05-15
+ * @date 2026-05-16
  */
-public interface IServiceProjectService 
+public interface IServiceProjectService extends IService<ServiceProject>
 {
     /**
      * 查询服务项目

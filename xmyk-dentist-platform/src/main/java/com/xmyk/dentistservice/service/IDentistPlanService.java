@@ -3,6 +3,8 @@ package com.xmyk.dentistservice.service;
 import java.util.List;
 import com.xmyk.dentistservice.domain.DentistPlan;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xmyk.dentistservice.dto.DentistPlanDto;
+import com.xmyk.dentistservice.vo.DentistPlanVo;
 
 /**
  * 牙科计划Service接口
@@ -18,7 +20,7 @@ public interface IDentistPlanService extends IService<DentistPlan>
      * @param id 牙科计划主键
      * @return 牙科计划
      */
-    public DentistPlan selectDentistPlanById(Long id);
+    public DentistPlanVo selectDentistPlanById(Long id);
 
     /**
      * 查询牙科计划列表
@@ -31,18 +33,18 @@ public interface IDentistPlanService extends IService<DentistPlan>
     /**
      * 新增牙科计划
      * 
-     * @param dentistPlan 牙科计划
+     * @param dentistPlanDto 牙科计划
      * @return 结果
      */
-    public int insertDentistPlan(DentistPlan dentistPlan);
+    public int insertDentistPlan(DentistPlanDto dentistPlanDto);
 
     /**
      * 修改牙科计划
      * 
-     * @param dentistPlan 牙科计划
+     * @param dentistPlanDto 牙科计划
      * @return 结果
      */
-    public int updateDentistPlan(DentistPlan dentistPlan);
+    public int updateDentistPlan(DentistPlanDto dentistPlanDto);
 
     /**
      * 批量删除牙科计划

@@ -3,6 +3,7 @@ package com.xmyk.dentistservice.service;
 import java.util.List;
 import com.xmyk.dentistservice.domain.ServiceProject;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xmyk.dentistservice.vo.ServiceProjectVo;
 
 /**
  * 服务项目Service接口
@@ -59,4 +60,10 @@ public interface IServiceProjectService extends IService<ServiceProject>
      * @return 结果
      */
     public int deleteServiceProjectById(Long id);
+
+    /**
+     * 获取全部服务项目
+     * @return 全部服务项目
+     */
+    List<ServiceProjectVo> getAllProjects();
 }

@@ -3,7 +3,9 @@ package com.xmyk.dentistservice.mapper;
 import java.util.List;
 import com.xmyk.dentistservice.domain.ServiceProject;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.xmyk.dentistservice.vo.ServiceProjectVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * 服务项目Mapper接口
@@ -61,4 +63,10 @@ public interface ServiceProjectMapper extends BaseMapper<ServiceProject>
      * @return 结果
      */
     public int deleteServiceProjectByIds(Long[] ids);
+
+    /**
+     * 获取全部服务项目
+     */
+    @Select("select name label , id value from service_project where status = 1 ")
+    List<ServiceProjectVo> getAllProjects();
 }

@@ -3,6 +3,7 @@ package com.xmyk.dentistservice.service.impl;
 import java.util.Arrays;
 import java.util.List;
 import com.xmyk.common.utils.DateUtils;
+import com.xmyk.dentistservice.vo.ServiceProjectVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.xmyk.dentistservice.mapper.ServiceProjectMapper;
@@ -92,5 +93,15 @@ public class ServiceProjectServiceImpl extends ServiceImpl<ServiceProjectMapper,
     public int deleteServiceProjectById(Long id)
     {
         return removeById(id) ? 1 : 0;
+    }
+
+    /**
+     * 获取全部服务项目
+     *
+     * @return 全部服务项目
+     */
+    @Override
+    public List<ServiceProjectVo> getAllProjects() {
+        return serviceProjectMapper.getAllProjects();
     }
 }

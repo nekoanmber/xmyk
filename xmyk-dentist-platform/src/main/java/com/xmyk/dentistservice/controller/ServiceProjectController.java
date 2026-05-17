@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xmyk.common.core.domain.R;
+import com.xmyk.dentistservice.vo.ServiceProjectVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -112,5 +113,16 @@ public class ServiceProjectController extends BaseController
     public AjaxResult remove(@PathVariable @ApiParam("删除条件对象") Long[] ids)
     {
         return toAjax(serviceProjectService.deleteServiceProjectByIds(ids));
+    }
+
+    /**
+     * 获取全部服务项目
+     */
+    @GetMapping("/getAllProjects")
+    @ApiOperation("获取全部服务项目")
+    public R<List<ServiceProjectVo>> getAllProjects()
+    {
+        List<ServiceProjectVo> list = serviceProjectService.getAllProjects();
+        return R.ok(list);
     }
 }

@@ -4,6 +4,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xmyk.common.core.domain.R;
+import com.xmyk.dentistservice.dto.DentistPlanDto;
+import com.xmyk.dentistservice.vo.DentistPlanVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -73,7 +75,7 @@ public class DentistPlanController extends BaseController
     @ApiOperation("获取牙科计划详细信息")
     @PreAuthorize("@ss.hasPermi('dentistservice:plan:query')")
     @GetMapping(value = "/{id}")
-    public R<DentistPlan> getInfo(@PathVariable("id") @ApiParam("牙科计划ID") Long id)
+    public R<DentistPlanVo> getInfo(@PathVariable("id") @ApiParam("牙科计划ID") Long id)
     {
         return R.ok(dentistPlanService.selectDentistPlanById(id));
     }
@@ -85,9 +87,9 @@ public class DentistPlanController extends BaseController
     @PreAuthorize("@ss.hasPermi('dentistservice:plan:add')")
     @Log(title = "牙科计划", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody @ApiParam("新增条件对象") DentistPlan dentistPlan)
+    public AjaxResult add(@RequestBody @ApiParam("新增条件对象") DentistPlanDto dentistPlanDto)
     {
-        return toAjax(dentistPlanService.insertDentistPlan(dentistPlan));
+        return toAjax(dentistPlanService.insertDentistPlan(dentistPlanDto));
     }
 
     /**
@@ -97,9 +99,9 @@ public class DentistPlanController extends BaseController
     @PreAuthorize("@ss.hasPermi('dentistservice:plan:edit')")
     @Log(title = "牙科计划", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody @ApiParam("修改条件对象") DentistPlan dentistPlan)
+    public AjaxResult edit(@RequestBody @ApiParam("修改条件对象") DentistPlanDto dentistPlanDto)
     {
-        return toAjax(dentistPlanService.updateDentistPlan(dentistPlan));
+        return toAjax(dentistPlanService.updateDentistPlan(dentistPlanDto));
     }
 
     /**
@@ -108,9 +110,9 @@ public class DentistPlanController extends BaseController
     @ApiOperation("删除牙科计划")
     @PreAuthorize("@ss.hasPermi('dentistservice:plan:remove')")
     @Log(title = "牙科计划", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable @ApiParam("删除条件对象") Long[] ids)
+	@DeleteMapping("/{id}")
+    public AjaxResult remove(@PathVariable @ApiParam("删除条件对象") Long id)
     {
-        return toAjax(dentistPlanService.deleteDentistPlanByIds(ids));
+        return toAjax(dentistPlanService.deleteDentistPlanById(id));
     }
 }

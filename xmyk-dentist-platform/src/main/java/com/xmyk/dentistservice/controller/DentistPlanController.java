@@ -115,4 +115,14 @@ public class DentistPlanController extends BaseController
     {
         return toAjax(dentistPlanService.deleteDentistPlanById(id));
     }
+
+    /**
+     * 获取全部牙科套餐（返回Vo）
+     */
+    @GetMapping("/getAllPlans")
+    @ApiOperation("获取全部牙科套餐（返回Vo）")
+    public R<List<DentistPlanVo>> getAllPlans() {
+        List<DentistPlanVo> dentistPlanVoList = dentistPlanService.getAllPlans();
+        return R.ok(dentistPlanVoList);
+    }
 }

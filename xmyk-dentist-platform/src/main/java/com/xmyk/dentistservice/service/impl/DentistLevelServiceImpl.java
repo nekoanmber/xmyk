@@ -3,6 +3,7 @@ package com.xmyk.dentistservice.service.impl;
 import java.util.Arrays;
 import java.util.List;
 import com.xmyk.common.utils.DateUtils;
+import com.xmyk.dentistservice.vo.DentistLevelVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.xmyk.dentistservice.mapper.DentistLevelMapper;
@@ -80,6 +81,17 @@ public class DentistLevelServiceImpl extends ServiceImpl<DentistLevelMapper, Den
     public int deleteDentistLevelByIds(Long[] ids)
     {
         return removeByIds(Arrays.asList(ids)) ? 1 : 0;
+    }
+
+    /**
+     * 查询牙科等级列表(返回Vo)
+     *
+     * @param dentistLevel 牙科等级
+     * @return 牙科等级集合
+     */
+    @Override
+    public List<DentistLevelVo> selectDentistLevelVoList(DentistLevel dentistLevel) {
+        return dentistLevelMapper.selectDentistLevelVoList(dentistLevel);
     }
 
     /**

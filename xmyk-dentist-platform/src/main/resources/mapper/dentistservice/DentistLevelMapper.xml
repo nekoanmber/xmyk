@@ -37,6 +37,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectDentistLevelVo"/>
         where id = #{id}
     </select>
+    <select id="selectDentistLevelVoList" resultType="com.xmyk.dentistservice.vo.DentistLevelVo">
+        select dl.id,
+               dl.name,
+               dl.plan_id,
+               dl.fee,
+               dl.status,
+               dl.description,
+               dl.remark,
+               dl.create_time,
+               dl.update_time,
+               dl.create_by,
+               dl.update_by,
+               dp.plan_name
+        from dentist_level dl
+        join dentist_plan dp on dl.plan_id = dp.id
+        <where>
+            <if test="name != null  and name != ''"> and dl.name like concat('%', #{name}, '%')</if>
+            <if test="status != null"> and dl.status = #{status}</if>
+        </where>
+    </select>
 
     <insert id="insertDentistLevel" parameterType="DentistLevel" useGeneratedKeys="true" keyProperty="id">
         insert into dentist_level

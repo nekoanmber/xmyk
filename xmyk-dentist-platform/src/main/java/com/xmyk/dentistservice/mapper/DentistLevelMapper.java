@@ -3,6 +3,7 @@ package com.xmyk.dentistservice.mapper;
 import java.util.List;
 import com.xmyk.dentistservice.domain.DentistLevel;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.xmyk.dentistservice.vo.DentistLevelVo;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -61,4 +62,12 @@ public interface DentistLevelMapper extends BaseMapper<DentistLevel>
      * @return 结果
      */
     public int deleteDentistLevelByIds(Long[] ids);
+
+    /**
+     * 查询牙科等级列表(返回Vo)
+     *
+     * @param dentistLevel 牙科等级
+     * @return 牙科等级集合
+     */
+    List<DentistLevelVo> selectDentistLevelVoList(DentistLevel dentistLevel);
 }

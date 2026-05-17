@@ -3,7 +3,9 @@ package com.xmyk.dentistservice.mapper;
 import java.util.List;
 import com.xmyk.dentistservice.domain.DentistPlan;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.xmyk.dentistservice.vo.DentistPlanVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * 牙科计划Mapper接口
@@ -61,4 +63,11 @@ public interface DentistPlanMapper extends BaseMapper<DentistPlan>
      * @return 结果
      */
     public int deleteDentistPlanByIds(Long[] ids);
+
+    /**
+     * 获取全部牙科计划Vo
+     *
+     * @return 获取全部牙科计划
+     */
+    List<DentistPlanVo> getAllPlans();
 }

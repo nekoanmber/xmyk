@@ -3,6 +3,7 @@ package com.xmyk.dentistservice.service;
 import java.util.List;
 import com.xmyk.dentistservice.domain.DentistLevel;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.xmyk.dentistservice.vo.DentistLevelVo;
 
 /**
  * 牙科等级Service接口
@@ -59,4 +60,12 @@ public interface IDentistLevelService extends IService<DentistLevel>
      * @return 结果
      */
     public int deleteDentistLevelById(Long id);
+
+    /**
+     * 查询牙科等级列表(返回Vo)
+     *
+     * @param dentistLevel 牙科等级
+     * @return 牙科等级集合
+     */
+    List<DentistLevelVo> selectDentistLevelVoList(DentistLevel dentistLevel);
 }

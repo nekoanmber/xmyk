@@ -38,4 +38,10 @@ public class DentistPlanVo {
      */
     @ApiModelProperty("套餐和项目关联表")
     private List<DentistProjectPlanVo> projectPlans;
+
+    @ApiModelProperty("创建时间")
+    private String createTime;
+
+    @ApiModelProperty("创建人")
+    private String createBy;
 }

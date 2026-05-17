@@ -4,6 +4,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.xmyk.common.core.domain.R;
+import com.xmyk.dentistservice.vo.DentistLevelVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -46,10 +47,10 @@ public class DentistLevelController extends BaseController
     @ApiOperation("查询牙科等级列表")
     @PreAuthorize("@ss.hasPermi('dentistservice:level:list')")
     @GetMapping("/list")
-    public TableDataInfo<List<DentistLevel>> list(@ApiParam("查询条件对象") DentistLevel dentistLevel)
+    public TableDataInfo<List<DentistLevelVo>> list(@ApiParam("查询条件对象") DentistLevel dentistLevel)
     {
         startPage();
-        List<DentistLevel> list = dentistLevelService.selectDentistLevelList(dentistLevel);
+        List<DentistLevelVo> list = dentistLevelService.selectDentistLevelVoList(dentistLevel);
         return getDataTable(list);
     }
 
@@ -112,5 +113,14 @@ public class DentistLevelController extends BaseController
     public AjaxResult remove(@PathVariable @ApiParam("删除条件对象") Long[] ids)
     {
         return toAjax(dentistLevelService.deleteDentistLevelByIds(ids));
+    }
+
+    /**
+     * 查询所有牙科等级
+     */
+    @GetMapping("/getAllLevels")
+    @ApiOperation("查询所有牙科等级")
+    public R<List<DentistLevel>> getAllLevels() {
+        return R.ok(dentistLevelService.list());
     }
 }

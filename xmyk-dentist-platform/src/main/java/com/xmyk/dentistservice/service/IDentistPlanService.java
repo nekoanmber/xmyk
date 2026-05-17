@@ -61,4 +61,10 @@ public interface IDentistPlanService extends IService<DentistPlan>
      * @return 结果
      */
     public int deleteDentistPlanById(Long id);
+
+    /**
+     * 获取全部牙科计划（Vo）
+     * @return 获取全部牙科计划
+     */
+    List<DentistPlanVo> getAllPlans();
 }

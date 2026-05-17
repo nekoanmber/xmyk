@@ -33,6 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectDentistPlanVo"/>
         where id = #{id}
     </select>
+    <select id="getAllPlans" resultType="com.xmyk.dentistservice.vo.DentistPlanVo">
+        select id, sort_no, plan_name, status, create_time, create_by from dentist_plan where status = 1
+    </select>
 
     <insert id="insertDentistPlan" parameterType="DentistPlan" useGeneratedKeys="true" keyProperty="id">
         insert into dentist_plan

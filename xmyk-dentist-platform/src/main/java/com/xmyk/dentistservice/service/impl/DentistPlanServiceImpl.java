@@ -139,4 +139,14 @@ public class DentistPlanServiceImpl extends ServiceImpl<DentistPlanMapper, Denti
         //删除套餐
         return removeById(id) ? 1 : 0;
     }
+
+    /**
+     * 获取全部牙科计划（Vo）
+     *
+     * @return 获取全部牙科计划
+     */
+    @Override
+    public List<DentistPlanVo> getAllPlans() {
+        return dentistPlanMapper.getAllPlans();
+    }
 }
